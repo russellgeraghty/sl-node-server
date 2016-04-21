@@ -1,0 +1,31 @@
+{
+  "name": "react-article-server",
+  "version": "0.0.1",
+  "description": "An article node server",
+  "keywords": [
+    "Article",
+    "Node",
+    "Server"
+  ],
+  "author": "Russell Geraghty",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "browserify": "~10.0.0",
+    "reactify": "~1.1.0",
+    "uglifyify": "~3.0.0",
+    "rewireify": "~0.2.2"
+  },
+  "dependencies": {
+    "express": "4.x",
+    "react": "~0.13.3",
+    "node-jsx": "~0.13.3"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "scripts": {
+    "build-dev": "browserify -e app/browser/bootstrap.jsx -t reactify -o public/scripts/bundle.dev.js --debug",
+    "build-min": "browserify -e app/browser/bootstrap.jsx -t reactify -g uglifyify -o public/scripts/bundle.min.js",
+    "build-tdd": "browserify -e test/spec/suite.js -t [ rewireify --ignore test/**,node_modules/** ] -t reactify -o test/spec/bundle.js --debug"
+  }
+}
