@@ -17,5 +17,5 @@ window.app = (function() {
   }
 
   var initialData = JSON.parse(document.getElementById("initial-data").innerHTML);
-  return React.render(<ArticleService networkData={networkData} initialData={initialData} />, document.getElementById("app"));
+  return React.render(<ArticleService articles={initialData} initialData={initialData} />, document.getElementById("app"));
 })();

@@ -4,28 +4,10 @@ var Articles = require("./articles.jsx");
 
 var ArticleService = React.createClass({
 
-  formatAndValidateUserInput: function(articleId) {
-    var articleId = null;
-
-    return {
-      articleId: articleId
-    };
-  },
-
   getInitialState: function() {
     var initialData = this.props.initialData;
 
-    return this.formatAndValidateUserInput(
-      initialData ? initialData.request.articleId : null
-    );
-  },
-
-  handleUpdate: function(e) {
-    var input = this.formatAndValidateUserInput(e.detail.line, e.detail.station);
-
-    if (input.line && input.station) {
-      this.setState(input);
-    }
+    return initialData;
   },
 
   componentWillUpdate: function(newProps, newState) {
@@ -49,7 +31,7 @@ var ArticleService = React.createClass({
           <Articles article={this.props.articles} />
         </div>
         <div className="layout__content">
-          <Article line={this.state.articleId} initialData={this.props.initialData} />
+          /*<Article line={this.state.articleId} initialData={this.props.initialData} />*/
         </div>
       </div>
     );
