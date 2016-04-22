@@ -11,7 +11,7 @@ APIRequest.prototype.for = function(articleId) {
 
 APIRequest.prototype.get = function(callback) {
     var formatCallback = this.format.bind(this);
-    var path = "/article/" + this.article_id;
+    var path = "/article/" + this.articleId;
 
     var options = {
         path: path,
@@ -54,12 +54,11 @@ APIRequest.prototype.format = function(responseText, callback) {
     return parsedResponse;
   }
 
-  return {
-    request: {
-      articleId: this.articleId
-    },
-    article: formatData(parsedResponse)
-  };
+  var formattedData = {};
+  formattedData.articleId = parsedResponse.articleId;
+  formattedData.headline = parsedResponse.headline;
+  formattedData.body = parsedResponse.body;
+  return formattedData;
 };
 
 function parseResponse(responseText) {
@@ -73,17 +72,6 @@ function parseResponse(responseText) {
     }
 
     return jsonData;
-};
-
-function formatData(responseData) {
-    var formattedData = {};
-
-    console.log(responseData)
-
-    formattedData.headline = responseData.headline;
-    formattedData.body = responseData.body;
-
-    return formattedData;
 };
 
 module.exports = APIRequest;

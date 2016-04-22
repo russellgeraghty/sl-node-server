@@ -65,11 +65,6 @@ ArticlesAPIRequest.prototype.formatList = function(responseText, callback) {
   });
 
   return formattedData;
-
-  return {
-
-    article: formatData(parsedResponse)
-  };
 };
 
 

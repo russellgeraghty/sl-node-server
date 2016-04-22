@@ -42,8 +42,9 @@ var Articles = React.createClass({
 
     return (
       <div className={"articles " + toggleClass}>
-        {articleList}
-        <button type="button" className="article__toggle" onClick={this.handleToggle}>{toggleText}</button>
+        <ul>
+          {articleList}
+        </ul>
       </div>
     );
   }
@@ -51,33 +52,15 @@ var Articles = React.createClass({
 });
 
 var Article = React.createClass({
-
-  handleSubmit: function(event) {
-    event.preventDefault();
-
-    // Dispatch an event for other components to capture
-    var updateEvent = new CustomEvent("tt:update", {
-      detail: {
-        article: React.findDOMNode(this.refs.article).value
-      },
-      bubbles: true
-    });
-
-    React.findDOMNode(this.refs.form).dispatchEvent(updateEvent);
-  },
-
   render: function() {
+    console.log(this.props);
     var articleId = this.props.articleId;
     var headline = this.props.headline;
 
     return (
-      <form ref="form" onSubmit={this.handleSubmit}>
-        <fieldset>
-          <input name="articleId" value={articleId} readOnly="true"/>
-          <input name="headline" value={headline} readOnly="true"/>
-          <button type="submit" title="View article">Go</button>
-        </fieldset>
-      </form>
+      <li>
+        <a href={"article/" + articleId}>{headline}</a>
+      </li>
     );
   }
 

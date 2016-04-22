@@ -1,8 +1,10 @@
 require("node-jsx").install({ extension: ".jsx" });
 
 var express = require("express");
-var API = require("./app/server/articles-api");
+var aritlcesAPI = require("./app/server/articles-api");
+var articleAPI = require("./app/server/article-api");
 var Bootstrap = require("./app/server/bootstrap.jsx");
+var ArticleBootstrap = require("./app/server/articleBootstrap.jsx")
 var config = {};
 
 // Start a new app
@@ -10,13 +12,33 @@ var app = express();
 
 // Serve initial HTML
 app.get("/", function(req, res) {
-  new API(config).list(function(err, data) {
+  new aritlcesAPI(config).list(function(err, data) {
     if (err) {
       console.log(err);
       return res.status(500).send("API error");
     }
 
     new Bootstrap(data).load(function(err, responseHTML) {
+      if (err) {
+        return res.status(500).send("Template error");
+      }
+
+      res.send(responseHTML);
+    });
+
+  });
+});
+
+// Serve initial HTML
+app.get("/article/:articleId", function(req, res) {
+  
+  new articleAPI(config).for(req.params.articleId).get(function(err, data) {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("API error");
+    }
+
+    new ArticleBootstrap(data).load(function(err, responseHTML) {
       if (err) {
         return res.status(500).send("Template error");
       }
