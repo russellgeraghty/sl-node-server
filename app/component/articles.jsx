@@ -53,7 +53,6 @@ var Articles = React.createClass({
 
 var Article = React.createClass({
   render: function() {
-    console.log(this.props);
     var articleId = this.props.articleId;
     var headline = this.props.headline;
 
